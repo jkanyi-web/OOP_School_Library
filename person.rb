@@ -1,11 +1,11 @@
 require_relative 'nameable'
 
-class Person
-  include Nameable
+class Person < Nameable
   attr_reader :id
   attr_accessor :name, :age
 
   def initialize(age, name = 'unknown', parent_permission: true)
+    super
     @name = name
     @age = age
     @parent_permission = parent_permission
