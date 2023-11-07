@@ -1,6 +1,7 @@
-require_relative 'Person'
+require_relative 'person'
 
 class Teacher < Person
+  include Person
   attr_accessor :specialization
 
   def initialize(id, age, specialization, name = 'unknown', parent_permission: true)
