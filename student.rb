@@ -1,6 +1,8 @@
 require_relative 'person'
 
 class Student < Person
+  attr_reader :classroom
+  
   belongs_to :classroom
 
   include Person
