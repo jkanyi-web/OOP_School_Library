@@ -15,5 +15,4 @@ class Classroom
     students.delete(student)
     student.classroom = nil
   end
-
 end
