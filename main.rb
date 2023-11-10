@@ -114,7 +114,7 @@ def list_rentals_for_person(app)
   app.list_rentals_for_person(person_id)
 end
 
-def handle_quit
+def handle_quit(_app)
   puts 'Thanks for using the app, Goodbye!'
   exit
 end
