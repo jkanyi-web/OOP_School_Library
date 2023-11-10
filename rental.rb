@@ -1,8 +1,18 @@
 class Rental
+  attr_accessor :date, :book, :person
+
+  def self.belongs_to(association)
+    define_method(association) do
+      instance_variable_get("@#{association}")
+    end
+
+    define_method("#{association}=") do |value|
+      instance_variable_set("@#{association}", value)
+    end
+  end
+
   belongs_to :book
   belongs_to :person
-
-  attr_accessor :date
 
   def initialize(date, book, person)
     @date = date

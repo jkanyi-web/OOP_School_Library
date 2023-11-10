@@ -1,13 +1,17 @@
-require_relative 'nameable'
-
-class Person < Nameable
-  has_many :rentals
-
-  attr_reader :id
+class Person
+  attr_reader :id, :rentals
   attr_accessor :name, :age
 
-  def initialize(age, name = 'unknown', parent_permission: true)
-    super(@nameable = name)
+  def self.many?(association)
+    define_method(association) do
+      instance_variable_get("@#{association}")
+    end
+  end
+
+  many? :rentals
+
+  def initialize(id, age, name = 'unknown', parent_permission: true)
+    @id = id
     @age = age
     @rentals = []
     @name = name
@@ -15,7 +19,8 @@ class Person < Nameable
   end
 
   def add_rental(book, date)
-    Rental.new(date, book, self)
+    rental = Rental.new(date, book, self)
+    @rentals << rental
   end
 
   def can_use_services?
