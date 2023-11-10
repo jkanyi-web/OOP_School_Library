@@ -5,6 +5,8 @@ require_relative 'teacher'
 require_relative 'student'
 
 class App
+  attr_reader :people, :books
+
   def initialize
     @people = []
     @books = []
