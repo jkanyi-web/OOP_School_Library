@@ -13,7 +13,6 @@ class Person
   def initialize(id, age, name = 'unknown', parent_permission: true)
     @id = id
     @age = age
-    @rentals = []
     @name = name
     @parent_permission = parent_permission
   end
