@@ -1,19 +1,20 @@
+# classroom.rb
 class Classroom
-  has_many :students
-  attr_reader :classroom
+  attr_reader :students
   attr_accessor :label
 
   def initialize(label)
     @label = label
+    @students = []
   end
 
   def add_student(student)
-    students << student
+    @students << student
     student.classroom = self
   end
 
   def remove_student(student)
-    students.delete(student)
+    @students.delete(student)
     student.classroom = nil
   end
 end

@@ -1,24 +1,28 @@
+# student.rb
 require_relative 'person'
 
 class Student < Person
   attr_reader :classroom
 
+  def self.belongs_to(association)
+    define_method(association) do
+      instance_variable_get("@#{association}")
+    end
+
+    define_method("#{association}=") do |value|
+      instance_variable_set("@#{association}", value)
+    end
+  end
+
   belongs_to :classroom
 
-  include Person
   attr_accessor :name
 
-  def initialize(id, age, classroom, name = 'unknown', parent_permission: true)
-    super(id, age, name, parent_permission)
-    @classroom = classroom
+  def initialize(id, age, name = 'unknown')
+    super(id, age, name)
   end
 
   def play_hooky
     '¯(ツ)/¯'
-  end
-
-  def classroom=(classroom)
-    @classroom = classroom
-    classroom.add_student(self) unless classroom.students.include?(self)
   end
 end

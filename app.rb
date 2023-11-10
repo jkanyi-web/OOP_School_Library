@@ -1,101 +1,73 @@
 require_relative 'person'
 require_relative 'book'
 require_relative 'rental'
+require_relative 'teacher'
+require_relative 'student'
 
 class App
-  def list_books
-    Book.all.each do |book|
-      puts "Title: #{book.title}"
-      puts "Author: #{book.author}"
-      puts '----------'
+  def initialize
+    @people = []
+    @books = []
+    @rentals = []
+  end
+
+  def list_all_books
+    @books.each do |book|
+      puts "ID: #{book.id}, Title: #{book.title}, Author: #{book.author}"
     end
   end
 
-  def list_people
-    Person.all.each do |person|
-      puts "Name: #{person.correct_name}"
-      puts "Age: #{person.age}"
-      puts "Classroom: #{person.classroom&.label}" if person.is_a?(Student)
-      puts "Specialization: #{person.specialization}" if person.is_a?(Teacher)
-      puts '----------'
+  def list_all_people
+    @people.each do |person|
+      role = person.is_a?(Teacher) ? 'Teacher' : 'Student'
+      puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Role: #{role}"
     end
   end
 
-  def create_person
-    puts "Enter person's name: "
-    name = gets.chomp
+  def create_person(is_teacher, id, age, name, specialization: nil)
+    if is_teacher
+      person = Teacher.new(id, age, specialization, name)
+      puts 'Teacher created successfully...'
 
-    puts "Enter person's age: "
-    age = gets.chomp.to_i
-
-    puts "Enter person's classroom label (if student): "
-    classroom_label = gets.chomp
-
-    puts "Enter person's specialization (if teacher): "
-    specialization = gets.chomp
-
-    if classroom_label
-      classroom = Classroom.find_or_create_by(label: classroom_label)
-      person = Student.new(age, name, classroom)
     else
-      person = Teacher.new(age, name, specialization)
+      person = Student.new(id, age, name)
+      puts 'Student created successfully...'
     end
-
-    person.save
-    puts "Person #{person.correct_name} created successfully."
+    @people << person
   end
 
-  def create_book
-    puts "Enter book's title: "
-    title = gets.chomp
-
-    puts "Enter book's author: "
-    author = gets.chomp
-
-    book = Book.new(title, author)
-    book.save
-    puts "Book #{book.title} created successfully."
+  def create_book(id, title, author)
+    book = Book.new(id, title, author)
+    @books << book
   end
 
-  def create_rental
-    puts "Enter person's ID: "
-    person_id = gets.chomp.to_i
+  def create_rental(person_id, book_id, date_str)
+    person = @people.find { |p| p.id == person_id }
+    book = @books.find { |b| b.id == book_id }
 
-    person = Person.find(person_id)
-    unless person
-      puts "Person with ID #{person_id} not found."
-      return
+    if person && book
+      rental = Rental.new(date_str, book, person)
+      @rentals << rental
+      puts 'Rental created successfully.'
+    else
+      puts 'Person or book not found.'
     end
-
-    puts "Enter book's ID: "
-    book_id = gets.chomp.to_i
-
-    book = Book.find(book_id)
-    unless book
-      puts "Book with ID #{book_id} not found."
-      return
-    end
-
-    puts 'Enter rental date (YYYY-MM-DD): '
-    rental_date = gets.chomp
-
-    rental = Rental.new(rental_date, book, person)
-    rental.save
-    puts "Rental for book #{book.title} by person #{person.correct_name} created successfully."
   end
 
   def list_rentals_for_person(person_id)
-    person = Person.find(person_id)
-    unless person
-      puts "Person with ID #{person_id} not found."
-      return
-    end
-
-    person.rentals.each do |rental|
-      book = rental.book
-      puts "Book: #{book.title}"
-      puts "Rental Date: #{rental.date}"
-      puts '----------'
+    person = @people.find { |p| p.id == person_id }
+    if person
+      person_rentals = @rentals.select { |rental| rental.person == person }
+      if person_rentals.empty?
+        puts 'No rentals for this person.'
+      else
+        puts "Rentals for #{person.name}:"
+        person_rentals.each do |rental|
+          puts "Book: #{rental.book.title}, Date: #{rental.date}"
+        end
+      end
+    else
+      puts 'Person not found.'
     end
   end
 end
