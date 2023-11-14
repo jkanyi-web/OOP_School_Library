@@ -13,39 +13,40 @@ class App
     @rentals = []
   end
 
+  def add_person(person)
+    @people << person
+  end
+
+  def add_book(book)
+    @books << book
+  end
+
+  def list_books
+    @books.dup
+  end
+
   def list_all_books
-    @books.each do |book|
-      puts "ID: #{book.id}, Title: #{book.title}, Author: #{book.author}"
-    end
+    print_items(@books) { |book| book_info(book) }
   end
 
   def list_all_people
-    @people.each do |person|
-      role = person.is_a?(Teacher) ? 'Teacher' : 'Student'
-      puts "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Role: #{role}"
-    end
+    print_items(@people) { |person| person_info(person) }
   end
 
   def create_person(is_teacher, id, age, name, specialization: nil)
-    if is_teacher
-      person = Teacher.new(id, age, specialization, name)
-      puts 'Teacher created successfully...'
-
-    else
-      person = Student.new(id, age, name)
-      puts 'Student created successfully...'
-    end
-    @people << person
+    person = build_person(is_teacher, id, age, name, specialization)
+    add_person(person)
   end
 
   def create_book(id, title, author)
     book = Book.new(id, title, author)
-    @books << book
+    add_book(book)
+    puts 'Book created successfully...'
   end
 
   def create_rental(person_id, book_id, date_str)
-    person = @people.find { |p| p.id == person_id }
-    book = @books.find { |b| b.id == book_id }
+    person = find_by_id(@people, person_id)
+    book = find_by_id(@books, book_id)
 
     if person && book
       rental = Rental.new(date_str, book, person)
@@ -57,19 +58,44 @@ class App
   end
 
   def list_rentals_for_person(person_id)
-    person = @people.find { |p| p.id == person_id }
+    person = find_by_id(@people, person_id)
     if person
       person_rentals = @rentals.select { |rental| rental.person == person }
-      if person_rentals.empty?
-        puts 'No rentals for this person.'
-      else
-        puts "Rentals for #{person.name}:"
-        person_rentals.each do |rental|
-          puts "Book: #{rental.book.title}, Date: #{rental.date}"
-        end
-      end
+      display_person_rentals(person, person_rentals)
     else
       puts 'Person not found.'
     end
+  end
+
+  private
+
+  def find_by_id(collection, id)
+    collection.find { |item| item.id == id }
+  end
+
+  def print_items(items, &_)
+    items.each_with_index { |item, index| puts "#{index + 1}. #{yield(item)}" }
+  end
+
+  def build_person(is_teacher, id, age, name, specialization)
+    is_teacher ? Teacher.new(id, age, specialization, name) : Student.new(id, age, name)
+  end
+
+  def display_person_rentals(person, rentals)
+    if rentals.empty?
+      puts "No rentals for #{person.name}."
+    else
+      puts "Rentals for #{person.name}:"
+      print_items(rentals) { |rental| "Book: #{book_info(rental.book)}, Date: #{rental.date}" }
+    end
+  end
+
+  def book_info(book)
+    "ID: #{book.id}, Title: #{book.title}, Author: #{book.author}"
+  end
+
+  def person_info(person)
+    role = person.is_a?(Teacher) ? 'Teacher' : 'Student'
+    "ID: #{person.id}, Name: #{person.name}, Age: #{person.age}, Role: #{role}"
   end
 end

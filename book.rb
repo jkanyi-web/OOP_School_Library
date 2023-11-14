@@ -1,13 +1,5 @@
 class Book
-  attr_accessor :id, :title, :author
-
-  def self.many?(association)
-    define_method(association) do
-      instance_variable_get("@#{association}")
-    end
-  end
-
-  many? :rentals
+  attr_accessor :id, :title, :author, :rentals
 
   def initialize(id, title, author)
     @id = id
@@ -16,8 +8,7 @@ class Book
     @rentals = []
   end
 
-  def add_rental(person, date)
-    rental = Rental.new(date, self, person)
+  def add_rental(rental)
     @rentals << rental
   end
 end
