@@ -1,4 +1,3 @@
-# classroom.rb
 class Classroom
   attr_reader :students
   attr_accessor :label
@@ -10,11 +9,11 @@ class Classroom
 
   def add_student(student)
     @students << student
-    student.classroom = self
+    student.assign_to_classroom(self)
   end
 
   def remove_student(student)
     @students.delete(student)
-    student.classroom = nil
+    student.remove_from_classroom
   end
 end
