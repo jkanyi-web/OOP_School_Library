@@ -36,6 +36,7 @@ class App
   def create_person(is_teacher, id, age, name, specialization: nil)
     person = build_person(is_teacher, id, age, name, specialization)
     add_person(person)
+    puts 'Person created successfully...'
   end
 
   def create_book(id, title, author)
@@ -55,6 +56,20 @@ class App
     else
       puts 'Person or book not found.'
     end
+  end
+
+  def person_book_numbers
+    puts 'Enter the number of the person:'
+    person_number = gets.chomp.to_i
+    puts 'Enter the number of the book:'
+    book_number = gets.chomp.to_i
+    [person_number, book_number]
+  end
+
+  def valid_numbers?(person_number, book_number)
+    people_count = @people.length
+    books_count = @books.length
+    person_number.between?(1, people_count) && book_number.between?(1, books_count)
   end
 
   def list_rentals_for_person(person_id)
