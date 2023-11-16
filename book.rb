@@ -11,4 +11,12 @@ class Book
   def add_rental(rental)
     @rentals << rental
   end
+
+  def to_hash
+    {
+      'id' => id,
+      'title' => title,
+      'author' => author
+    }
+  end
 end

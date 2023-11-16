@@ -18,6 +18,14 @@ class Person
     @rentals << rental
   end
 
+  def to_hash
+    {
+      'id' => id,
+      'age' => age,
+      'name' => name
+    }
+  end
+
   private
 
   def of_age?
