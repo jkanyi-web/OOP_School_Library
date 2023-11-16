@@ -3,6 +3,7 @@ require_relative 'book'
 require_relative 'rental'
 require_relative 'teacher'
 require_relative 'student'
+require_relative 'preserve-data/books_manager'
 
 class App
   attr_reader :people, :books
@@ -11,6 +12,18 @@ class App
     @people = []
     @books = []
     @rentals = []
+    @data_manager = BooksManager.new
+    load_data
+  end
+
+  def load_data
+    @data_manager.load_data
+    @books = @data_manager.books
+  end
+
+  def save_data
+    @data_manager.save_books
+    puts 'Book saved successfully!'
   end
 
   def add_person(person)
@@ -43,6 +56,7 @@ class App
     book = Book.new(id, title, author)
     add_book(book)
     puts 'Book created successfully...'
+    save_data
   end
 
   def create_rental(person_id, book_id, date_str)
