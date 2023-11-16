@@ -4,6 +4,7 @@ require_relative 'rental'
 require_relative 'teacher'
 require_relative 'student'
 require_relative 'preserve-data/books_manager'
+require_relative 'preserve-data/rentals_manager'
 
 class App
   attr_reader :people, :books
@@ -12,18 +13,30 @@ class App
     @people = []
     @books = []
     @rentals = []
-    @data_manager = BooksManager.new
+    @books_manager = BooksManager.new
+    @rental_manager = RentalsManager.new
     load_data
+    load_rental_data
   end
 
   def load_data
-    @data_manager.load_data
-    @books = @data_manager.books
+    @books_manager.load_data
+    @books = @books_manager.books
   end
 
   def save_data
-    @data_manager.save_books
+    @books_manager.save_books
     puts 'Book saved successfully!'
+  end
+
+  def load_rental_data
+    @rental_manager.load_rental_data
+    @rentals = @rental_manager.rentals
+  end
+
+  def save_rental_data
+    @rental_manager.save_rentals
+    puts 'Rental saved successfully!'
   end
 
   def add_person(person)
@@ -67,6 +80,7 @@ class App
       rental = Rental.new(date_str, book, person)
       @rentals << rental
       puts 'Rental created successfully.'
+      save_rental_data
     else
       puts 'Person or book not found.'
     end
