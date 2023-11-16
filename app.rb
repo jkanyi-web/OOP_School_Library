@@ -4,6 +4,7 @@ require_relative 'rental'
 require_relative 'teacher'
 require_relative 'student'
 require_relative 'preserve-data/books_manager'
+require_relative 'preserve-data/people_manager'
 require_relative 'preserve-data/rentals_manager'
 
 class App
@@ -14,17 +15,19 @@ class App
     @books = []
     @rentals = []
     @books_manager = BooksManager.new
+    @people_manager = PeopleManager.new
     @rental_manager = RentalsManager.new
-    load_data
+    load_book_data
     load_rental_data
+    load_people_data
   end
 
-  def load_data
-    @books_manager.load_data
+  def load_book_data
+    @books_manager.load_books_data
     @books = @books_manager.books
   end
 
-  def save_data
+  def save_book_data
     @books_manager.save_books
     puts 'Book saved successfully!'
   end
@@ -37,6 +40,16 @@ class App
   def save_rental_data
     @rental_manager.save_rentals
     puts 'Rental saved successfully!'
+  end
+
+  def load_people_data
+    @people_manager.load_people_data
+    @people = @people_manager.people
+  end
+
+  def save_people_data
+    @people_manager.save_people
+    puts 'person saved successfully!'
   end
 
   def add_person(person)
@@ -63,13 +76,14 @@ class App
     person = build_person(is_teacher, id, age, name, specialization)
     add_person(person)
     puts 'Person created successfully...'
+    save_people_data
   end
 
   def create_book(id, title, author)
     book = Book.new(id, title, author)
     add_book(book)
     puts 'Book created successfully...'
-    save_data
+    save_book_data
   end
 
   def create_rental(person_id, book_id, date_str)

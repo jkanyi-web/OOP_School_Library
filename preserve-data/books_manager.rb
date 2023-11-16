@@ -7,7 +7,7 @@ class BooksManager
     @books = []
   end
 
-  def load_data
+  def load_books_data
     load_books
   end
 
