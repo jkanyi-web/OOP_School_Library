@@ -91,7 +91,7 @@ To install the project's dependencies, with:
 
 - GitHub: [@newtonah()](https://github.com/newtonah0)
 - Twitter: [@]()
-- LinkedIn: [LinkedIn]()
+- LinkedIn: [ah-mh](https://www.linkedin.com/in/ah-mh-4a0661271)
 
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
