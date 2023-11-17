@@ -25,7 +25,7 @@
 
 # 📖 [OOP_School_Library] <a name="about-project"></a>
 
-**[OOP_School_Library]** provides collection classes with several traversal and searching methods, and with the ability to sort. 
+**[OOP_School_Library]** is an app that allows a librarian of OOP University to add new students and teachers, add new books and save records of who borrowed which book and when
 
 ## 🛠 Built With <a name="built-with"></a>
 
