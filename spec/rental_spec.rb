@@ -1,7 +1,7 @@
 require './spec_helper'
 
 describe Rental do
-  let(:book) { Book.new('Title', 'Author') }
+  let(:book) { Book.new(1, 'Title', 'Author') }
   let(:person) { Person.new(1, 18, 'John Doe', parent_permission: true) }
   let(:rental) { Rental.new('2022-01-01', book, person) }
 
