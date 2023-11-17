@@ -1,6 +1,5 @@
 require './spec_helper'
 
-
 describe Person do
   describe '#initialize' do
     it 'creates a new person object with the given attributes' do

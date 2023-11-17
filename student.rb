@@ -10,4 +10,12 @@ class Student < Person
   def play_hooky
     '¯(ツ)/¯'
   end
+
+  def assign_to_classroom(classroom)
+    @classroom = classroom
+  end
+
+  def remove_from_classroom
+    @classroom = nil
+  end
 end
