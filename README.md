@@ -6,7 +6,7 @@
 # 📗 Table of Contents
 
 - [📗 Table of Contents](#-table-of-contents)
-- [📖 \[Enumerable\] ](#-enumerable-)
+- [📖 \[OOP_School_Library\] ](#-enumerable-)
   - [🛠 Built With ](#-built-with-)
     - [Tech Stack ](#tech-stack-)
     - [Key Features ](#key-features-)
@@ -25,7 +25,7 @@
 
 # 📖 [OOP_School_Library] <a name="about-project"></a>
 
-**[Enumerable]** provides collection classes with several traversal and searching methods, and with the ability to sort. 
+**[OOP_School_Library]** provides collection classes with several traversal and searching methods, and with the ability to sort. 
 
 ## 🛠 Built With <a name="built-with"></a>
 
@@ -86,6 +86,12 @@ To install the project's dependencies, with:
 - GitHub: [@jkanyi-web](https://github.com/jkanyi-web)
 - Twitter: [@V_Kanyi](https://twitter.com/V_Kanyi)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/victor-kanyi)
+
+  👤 **Ahmed**
+
+- GitHub: [@newtonah()](https://github.com/newtonah0)
+- Twitter: [@]()
+- LinkedIn: [LinkedIn]()
 
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
