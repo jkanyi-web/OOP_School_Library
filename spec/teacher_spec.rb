@@ -1,5 +1,3 @@
-# teacher_spec.rb
-
 require_relative 'spec_helper'
 
 describe Teacher do

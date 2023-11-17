@@ -1,4 +1,4 @@
-require './spec_helper'
+require_relative 'spec_helper'
 
 describe Rental do
   let(:book) { Book.new(1, 'Title', 'Author') }
