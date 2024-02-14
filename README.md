@@ -86,7 +86,6 @@ To install the project's dependencies, with:
 - GitHub: [@jkanyi-web](https://github.com/jkanyi-web)
 - Twitter: [@V_Kanyi](https://twitter.com/V_Kanyi)
 - LinkedIn: [LinkedIn](https://linkedin.com/in/victor-kanyi)
-
   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -98,7 +97,6 @@ To install the project's dependencies, with:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 ## 🤝 Contributing <a name="contributing"></a>
 
 Contributions, issues, and feature requests are welcome!
@@ -107,13 +105,11 @@ Feel free to check the [issues page](https://github.com/jkanyi-web/OOP_School_Li
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-
 ## ⭐️ Show your support <a name="support"></a>
 
 If you like this project, please, feel free to give a star to the repository and share it with others who might benefit from it.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
-
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
